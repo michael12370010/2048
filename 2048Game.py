@@ -2,25 +2,24 @@ import tkinter as tk
 import colors as c
 import random
 
-
 class Game(tk.Frame):
     def __init__(self):
         tk.Frame.__init__(self)
         self.grid()
         self.master.title("2048")
         
-        self.grid_utama = tk.Frame(
+        self.main_grid = tk.Frame(
             self, bg=c.GRID_COLOR, bd=3, width=600, height=600
         )
-        self.grid_utama.grid(pady=(100, 0))
-        self.GUI()
+        self.main_grid.grid(pady=(100, 0))
+        self.make_GUI()
         self.master.resizable(False, False) 
         self.start_game()
         
-        self.master.bind("<Left>", self.kiri)
-        self.master.bind("<Right>", self.kanan)
-        self.master.bind("<Up>", self.atas)
-        self.master.bind("<Down>", self.bawah)
+        self.master.bind("<Left>", self.left)
+        self.master.bind("<Right>", self.right)
+        self.master.bind("<Up>", self.up)
+        self.master.bind("<Down>", self.down)
 
         self.mainloop()
 
@@ -88,17 +87,15 @@ class Game(tk.Frame):
 
 
     #matrix manipulation function
-
-    def stack(self):
+ def stack(self):
         new_matrix = [[0]*4 for _ in range(4)]
-        for horizontal in range(4):
+        for i in range(4):
             fill_position = 0
-            for vertical in range(4):
-                if self.matrix[horizontal][vertical] !=0:
-                    new_matrix[horizontal][fill_position] = self.matrix[horizontal][vertical]
+            for j in range(4):
+                if self.matrix[i][j] !=0:
+                    new_matrix[i][fill_position] = self.matrix[i][j]
                     fill_position += 1
         self.matrix = new_matrix
-
 
     def combine(self):
         for horizontal in range(4):
