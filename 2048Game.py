@@ -152,12 +152,14 @@ class Game(tk.Frame):
             for vertical in range(3):
                 if self.matrix[horizontal][vertical] == self.matrix[horizontal][vertical + 1]:
                     return True
+        return False
 
     def vertical_move_exists(self):
         for horizontal in range(3):
             for vertical in range(4):
                 if self.matrix[horizontal][vertical] == self.matrix[horizontal + 1][vertical]:
                     return True
+        return False
 
 
     # Check if game is over (Win/Lose)
@@ -183,7 +185,7 @@ class Game(tk.Frame):
                 fg=c.GAME_OVER_COLOR,
                 font=c.GAME_OVER_FONT
             ).pack()
-
+            
     # Arrow press function
 
     def kiri(self, event):
