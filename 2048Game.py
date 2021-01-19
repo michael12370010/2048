@@ -124,7 +124,7 @@ class Game(tk.Frame):
         self.matrix[row][col] = random.choice([2, 4])
 
 
-    #update the GUI to match  the matrix
+    #update the GUI to match the matrix
 
     def update_GUI(self):
         for horizontal in range(4):
@@ -144,48 +144,6 @@ class Game(tk.Frame):
         self.score_label.configure(text=self.score)
         self.update_idletasks()
 
-
-    # Arrow press function
-
-    def kiri(self, event):
-        self.stack()
-        self.combine()
-        self.stack()
-        self.add_new_tile()
-        self.update_GUI()
-        self.game_over()
-
-    def kanan(self, event):
-        self.reverse()
-        self.stack()
-        self.combine()
-        self.stack()
-        self.reverse()
-        self.add_new_tile()
-        self.update_GUI()
-        self.game_over()
-
-    def atas(self, event):
-        self.transpose()
-        self.stack()
-        self.combine()
-        self.stack()
-        self.transpose()
-        self.add_new_tile()
-        self.update_GUI()
-        self.game_over()
-
-    def bawah(self, event):
-        self.transpose()
-        self.reverse()
-        self.stack()
-        self.combine()
-        self.stack()
-        self.reverse()
-        self.transpose()
-        self.add_new_tile()
-        self.update_GUI()
-        self.game_over()
 
     # Check if any moves are possible
 
@@ -227,6 +185,47 @@ class Game(tk.Frame):
                 fg=c.GAME_OVER_COLOR,
                 font=c.GAME_OVER_FONT
             ).pack()
+            
+    # Arrow press function
 
+    def kiri(self, event):
+        self.stack()
+        self.combine()
+        self.stack()
+        self.add_new_tile()
+        self.update_GUI()
+        self.game_over()
+
+    def kanan(self, event):
+        self.reverse()
+        self.stack()
+        self.combine()
+        self.stack()
+        self.reverse()
+        self.add_new_tile()
+        self.update_GUI()
+        self.game_over()
+
+    def atas(self, event):
+        self.transpose()
+        self.stack()
+        self.combine()
+        self.stack()
+        self.transpose()
+        self.add_new_tile()
+        self.update_GUI()
+        self.game_over()
+
+    def bawah(self, event):
+        self.transpose()
+        self.reverse()
+        self.stack()
+        self.combine()
+        self.stack()
+        self.reverse()
+        self.transpose()
+        self.add_new_tile()
+        self.update_GUI()
+        self.game_over()
 
 Game()
