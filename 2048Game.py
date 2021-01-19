@@ -9,12 +9,12 @@ class Game(tk.Frame):
         self.grid()
         self.master.title("2048")
         
-        self.grid_utama = tk.Frame(
+        self.cell_grid = tk.Frame(
             self, bg=c.GRID_COLOR, bd=3, width=600, height=600
         )
-        self.grid_utama.grid(pady=(100, 0))
-        self.GUI()
+        self.cell_grid.grid(pady=(100, 0))
         self.master.resizable(False, False) 
+        self.GUI()
         self.start_game()
         
         self.master.bind("<Left>", self.kiri)
@@ -32,13 +32,13 @@ class Game(tk.Frame):
             row = []
             for vertical in range(4):
                 cell_frame = tk.Frame(
-                    self.grid_utama,
+                    self.cell_grid,
                     bg=c.EMPTY_COLOR,
                     width=150,
                     height=150
                 )
                 cell_frame.grid(row=horizontal, column=vertical, padx=5, pady=5)
-                cell_number = tk.Label(self.grid_utama, bg=c.EMPTY_COLOR)
+                cell_number = tk.Label(self.cell_grid, bg=c.EMPTY_COLOR)
                 cell_number.grid(row=horizontal, column=vertical)
                 cell_data = {"frame": cell_frame, "number": cell_number}
                 row.append(cell_data)
@@ -88,7 +88,6 @@ class Game(tk.Frame):
 
 
     #matrix manipulation function
-
     def stack(self):
         new_matrix = [[0]*4 for _ in range(4)]
         for horizontal in range(4):
@@ -221,7 +220,7 @@ class Game(tk.Frame):
 
     def game_over(self):
         if any(2048 in row for row in self.matrix):
-            game_over_frame = tk.Frame(self.grid_utama, borderwidth=2)
+            game_over_frame = tk.Frame(self.cell_grid, borderwidth=2)
             game_over_frame.place(relx=0.5, rely=0.5, anchor="center")
             tk.Label(
                 game_over_frame,
@@ -231,7 +230,7 @@ class Game(tk.Frame):
                 font=c.GAME_OVER_FONT
             ).pack()
         elif not any(0 in row for row in self.matrix) and not self.horizontal_move_exists() and not self.vertical_move_exists():
-            game_over_frame = tk.Frame(self.grid_utama, borderwidth=2)
+            game_over_frame = tk.Frame(self.cell_grid, borderwidth=2)
             game_over_frame.place(relx=0.5, rely=0.5, anchor="center")
             tk.Label(
                 game_over_frame,
